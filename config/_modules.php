@@ -3,7 +3,7 @@
 return array
 (
 	'blog' => array(
-		'alias' => 'kubikrubik-blog',
+		'alias' => 'greor-blog',
 		'name' => 'Blog module',
 		'type' => Helper_Module::MODULE_SINGLE,
 		'controller' => 'blog_entity'
