@@ -28,23 +28,18 @@ return array(
 					'privilege' => 'add',
 				),
 				'blog_edit_1' => array(
-					'role' => 'super',
-					'resource' => 'blog',
-					'privilege' => 'edit',
-				),
-				'blog_edit_2' => array(
 					'role' => 'full',
 					'resource' => 'blog',
 					'privilege' => 'edit',
-					'assertion' => array('Acl_Assert_Argument', array(
-						'site_id' => 'site_id'
+					'assertion' => array('Acl_Assert_Edit', array(
+						'site_id' => SITE_ID,
 					)),
 				),
 				'blog_hide' => array(
 					'role' => 'full',
 					'resource' => 'blog',
 					'privilege' => 'hide',
-					'assertion'	=> array('Acl_Assert_Site', array(
+					'assertion'	=> array('Acl_Assert_Hide', array(
 						'site_id' => SITE_ID,
 						'site_id_master' => SITE_ID_MASTER
 					)),
@@ -67,23 +62,18 @@ return array(
 
 				
 				'blog_post_edit_1' => array(
-					'role' => 'super',
-					'resource' => 'blog_post',
-					'privilege' => 'edit',
-				),
-				'blog_post_edit_2' => array(
 					'role' => 'base',
 					'resource' => 'blog_post',
 					'privilege' => 'edit',
-					'assertion' => array('Acl_Assert_Argument', array(
-						'site_id' => 'site_id'
+					'assertion' => array('Acl_Assert_Edit', array(
+						'site_id' => SITE_ID,
 					)),
 				),
 				'blog_post_hide' => array(
 					'role' => 'full',
 					'resource' => 'blog_post',
 					'privilege' => 'hide',
-					'assertion' => array('Acl_Assert_Site', array(
+					'assertion' => array('Acl_Assert_Hide', array(
 						'site_id' => SITE_ID,
 						'site_id_master' => SITE_ID_MASTER
 					)),
