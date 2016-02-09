@@ -58,6 +58,7 @@ class Model_Blog_Post extends ORM_Base {
 				array('min_length', array(':value', 2)),
 				array('max_length', array(':value', 255)),
 				array('alpha_dash'),
+				array(array($this, 'check_uri')),
 			),
 			'image' => array(
 				array('max_length', array(':value', 255)),
@@ -115,5 +116,33 @@ class Model_Blog_Post extends ORM_Base {
 			$this
 				->where($this->_object_name.'.public_date', '<=', date('Y-m-d H:i:00'));
 		}
+	}
+	
+	public function check_uri($value)
+	{
+		if ( ! $this->active) {
+			return TRUE;
+		}
+		
+		$orm = clone $this;
+		$orm->clear();
+		
+		if ($this->loaded()) {
+			$orm
+				->where('id', '!=', $this->id);
+		}
+		
+		if ($this->for_all) {
+			$orm
+				->site_id(NULL);
+		}
+		
+		$orm
+			->where('blog_id', '=', $this->blog_id)
+			->where('uri', '=', $this->uri)
+			->where('active', '>', 0)
+			->find();
+		
+		return ! $orm->loaded();
 	}
 }

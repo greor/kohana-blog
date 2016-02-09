@@ -144,11 +144,9 @@ class Controller_Admin_Modules_Blog_Element extends Controller_Admin_Modules_Blo
 				);
 				
 				$values['public_date'] = $this->value_multiple_date($values, 'public_date');
-				if (empty($values['uri']) OR row_exist($orm, 'uri', $values['uri'])) {
+				if (empty($values['uri'])) {
 					$values['uri'] = transliterate_unique($values['title'], $orm, 'uri');
 				}
-				
-				
 				
 				$helper_orm->save($values + $_FILES);
 				

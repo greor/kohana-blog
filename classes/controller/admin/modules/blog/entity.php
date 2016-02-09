@@ -115,7 +115,7 @@ class Controller_Admin_Modules_Blog_Entity extends Controller_Admin_Modules_Blog
 					'meta_tags'
 				);
 				
-				if (empty($values['uri']) OR row_exist($orm, 'uri', $values['uri'])) {
+				if (empty($values['uri'])) {
 					$values['uri'] = transliterate_unique($values['title'], $orm, 'uri');
 				}
 				

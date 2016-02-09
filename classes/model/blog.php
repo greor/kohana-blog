@@ -37,13 +37,11 @@ class Model_Blog extends ORM_Base {
 				array('not_empty'),
 				array('digit'),
 			),
-			'parent_id' => array(
-				array('digit'),
-			),
 			'uri' => array(
 				array('min_length', array(':value', 2)),
 				array('max_length', array(':value', 255)),
 				array('alpha_dash'),
+				array(array($this, 'check_uri')),
 			),
 			'group' => array(
 				array('not_empty'),
@@ -95,6 +93,34 @@ class Model_Blog extends ORM_Base {
 				array(array($this, 'checkbox'))
 			),
 		);
+	}
+	
+	public function check_uri($value)
+	{
+		if ( ! $this->status) {
+			return TRUE;
+		}
+	
+		$orm = clone $this;
+		$orm->clear();
+	
+		if ($this->loaded()) {
+			$orm
+				->where('id', '!=', $this->id);
+		}
+	
+		if ($this->for_all) {
+			$orm
+				->site_id(NULL);
+		}
+	
+		$orm
+			->where('group', '=', $this->group)
+			->where('uri', '=', $this->uri)
+			->where('status', '>', 0)
+			->find();
+	
+		return ! $orm->loaded();
 	}
 
 }
