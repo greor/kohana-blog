@@ -26,9 +26,9 @@ class ORM_Helper_Blog_Post extends ORM_Helper_Property_Support {
 
 	protected function _initialize_file_fields()
 	{
-		$this->_file_fields['image']['allowed_src_dirs'] = array( DOCROOT.'upload/tmp/' );
-		
 		parent::_initialize_file_fields();
+		
+		$this->_file_fields['image']['allowed_src_dirs'][] = TMP_DIRECTORY;
 	}
 	
 }
